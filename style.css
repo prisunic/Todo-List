@@ -15,6 +15,8 @@ body {
   min-height: 100vh;
 }
 
+/* All todo add styles */
+
 header {
   font-size: 2rem;
 }
@@ -45,4 +47,47 @@ form button {
 form button:hover {
   background: teal;
   color: white;
+}
+
+/* All todo items styles */
+
+.todo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-list {
+  min-width: 10%;
+  list-style: none;
+}
+
+.todo {
+  margin: 0.5rem;
+  background: white;
+  font-size: 1.5rem;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.todo li {
+  flex: 1;
+  padding: 0 0.5rem;
+}
+
+.confirm-btn,
+.delete-btn {
+  background: #f1cf36;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.confirm-btn {
+  background-color: rgb(19, 223, 70);
 }
