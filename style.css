@@ -5,7 +5,7 @@
 }
 
 body {
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
   background-image: linear-gradient(
     120deg,
     rgb(81, 185, 255),
@@ -38,15 +38,15 @@ form button {
 }
 
 form button {
-  color: teal;
-  background: white;
+  background: #13df46;
+  color: white;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 form button:hover {
-  background: teal;
-  color: white;
+  color: #13df46;
+  background: white;
 }
 
 /* All todo items styles */
@@ -58,7 +58,7 @@ form button:hover {
 }
 
 .todo-list {
-  min-width: 10%;
+  min-width: 30%;
   list-style: none;
 }
 
@@ -71,6 +71,7 @@ form button:hover {
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  transition: all 0.5s ease;
 }
 
 .todo li {
@@ -89,5 +90,63 @@ form button:hover {
 }
 
 .confirm-btn {
-  background-color: rgb(19, 223, 70);
+  background-color: #13df46;
+}
+
+/* Delete and Check icons no pointer events */
+.fa-check,
+.fa-trash {
+  pointer-events: none;
+}
+
+.completed {
+  opacity: 0.5;
+}
+.completed li {
+  text-decoration: line-through;
+}
+
+.deleted {
+  transform: translateY(8rem) rotateZ(25deg);
+  opacity: 0;
+}
+
+/* Filter styles */
+
+select {
+  --webkit-appearance: none;
+  --moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+}
+
+.select {
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+select {
+  color: rgb(97, 97, 245);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 10rem;
+  padding: 1rem;
+}
+
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  background: #f1cf36;
+  top: 0;
+  right: 0;
+  padding: 1.2rem;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.select:hover::after {
+  background: white;
+  color: #f1cf36;
 }
