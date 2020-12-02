@@ -8,71 +8,69 @@ const filterOption = document.querySelector(".filter-todo");
 todoInput.value = "";
 
 // Event Listeners
+
+// On Load Listeners
+document.addEventListener("DOMContentLoaded", getTodos);
+
+// On Event Listeners
 todoButton.addEventListener("click", addTodo);
-todoList.addEventListener("click", deleteCheck);
+todoList.addEventListener("click", delComTodo);
 filterOption.addEventListener("click", filterTodo);
 
-// asda
-// asda
-// asd
+/*
 
-// Functions
+
+
+        Event Listener Functions 
+
+
+
+*/
+
+// Adds todo to list
 function addTodo(event) {
   // Prevents form from submitting
   event.preventDefault();
 
-  // Todo div
-  const todoDiv = document.createElement("div");
-  todoDiv.classList.add("todo");
-
-  // Create li
-  const newTodo = document.createElement("li");
-  if (todoInput.value == "") {
+  // Creates the todo
+  // We use the trim function to check if the user input string is not just blanks
+  if (todoInput.value.trim() == "") {
     alert("Task cannot be empty");
     console.warn("Please enter a task");
   } else {
-    newTodo.innerText = todoInput.value;
-    newTodo.classList.add("new-todo");
-    todoDiv.appendChild(newTodo);
+    // Save Todo Locally
+    // We use the trim method to get rid of unwanted spaces
+    saveLocalTodos(todoInput.value.trim());
 
-    // Confirm Button
-    const confirmButton = document.createElement("button");
-    confirmButton.innerHTML = `<i class="fas fa-check"></i>`;
-    confirmButton.classList.add("confirm-btn");
-    todoDiv.appendChild(confirmButton);
-
-    // Delete Button
-    const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = `<i class="fas fa-trash"></i>`;
-    deleteButton.classList.add();
-    deleteButton.classList.add("delete-btn");
-    todoDiv.appendChild(deleteButton);
-
-    // Adding todoDiv to list
-    todoList.appendChild(todoDiv);
-
-    // Clear previous Todo input
-    todoInput.value = "";
+    // Creates Todo
+    createTodo(todoInput.value);
   }
+  // Clear previous Todo input
+  todoInput.value = "";
 }
 
-function deleteCheck(event) {
+// Deleted or Completed Todos
+function delComTodo(event) {
   const item = event.target;
 
-  //  Delete Item
+  //  Delete Todo
   if (item.classList[0] === "delete-btn") {
     const todo = item.parentElement;
 
     // Animation
     todo.classList.add("deleted");
 
+    // Delete todo from local storage
+    // We use todo.innertext to get the value of todo
+    deleteLocalTodos(todo.innerText);
+
+    // Delays deletion till animation ends
     todo.addEventListener("transitionend", () => {
-      console.log(todo);
       todo.remove();
     });
   }
 
-  //  Check mark
+  //  Completed Todo
   if (item.classList[0] === "confirm-btn") {
     const todo = item.parentElement;
     todo.classList.toggle("completed");
@@ -86,15 +84,69 @@ function deleteCheck(event) {
       todo.appendChild(deleteButton);
     }
   }
-  sortTodo(filterOption.value);
+  filter(filterOption.value);
 }
 
+// Todo Filter Functions
 function filterTodo(event) {
-  console.log("event", event);
-  sortTodo(event.target.value);
+  filter(event.target.value);
 }
 
-function sortTodo(val) {
+/*
+
+
+
+            Functions
+
+
+*/
+
+// Displays pre-existing Todos
+function getTodos() {
+  // Checks for previously existing todos
+  let todos;
+  if (localStorage.getItem("todos") == null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.forEach((todo) => {
+    createTodo(todo);
+  });
+}
+
+// Create Todo On Screen
+function createTodo(todo) {
+  // Todo div
+  const todoDiv = document.createElement("div");
+  todoDiv.classList.add("todo");
+
+  // Create li
+  const newTodo = document.createElement("li");
+
+  newTodo.innerText = todo;
+  newTodo.classList.add("new-todo");
+  todoDiv.appendChild(newTodo);
+
+  // Confirm Button
+  const confirmButton = document.createElement("button");
+  confirmButton.innerHTML = `<i class="fas fa-check"></i>`;
+  confirmButton.classList.add("confirm-btn");
+  todoDiv.appendChild(confirmButton);
+
+  // Delete Button
+  const deleteButton = document.createElement("button");
+  deleteButton.innerHTML = `<i class="fas fa-trash"></i>`;
+  deleteButton.classList.add();
+  deleteButton.classList.add("delete-btn");
+  todoDiv.appendChild(deleteButton);
+
+  // Adding todoDiv to list
+  todoList.appendChild(todoDiv);
+}
+
+// Filter Function
+function filter(val) {
   const todos = todoList.childNodes;
   todos.forEach((todo) => {
     switch (val) {
@@ -121,4 +173,30 @@ function sortTodo(val) {
         break;
     }
   });
+}
+
+// Saves Todos Locally
+function saveLocalTodos(todo) {
+  // Checks for previously existing todos
+  let todos;
+  if (localStorage.getItem("todos") == null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+// Delete Todos Locally
+function deleteLocalTodos(todo) {
+  // Checks for previously existing todos
+  let todos;
+  if (localStorage.getItem("todos") == null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.splice(todos.indexOf(todo), 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
