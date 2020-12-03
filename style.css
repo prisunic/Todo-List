@@ -15,7 +15,7 @@ body {
 
 header,
 form {
-  min-height: 11vh;
+  min-height: 12vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,8 @@ form {
 }
 
 header {
-  font-size: 2rem;
+  min-height: 10vh;
+  font-size: 1.5rem;
 }
 
 form input,
@@ -173,6 +174,9 @@ select {
 
 /* Footer*/
 footer {
+  position: sticky;
+  bottom: 0;
+  padding: 0 5vw;
   background: black;
   min-height: 10vh;
   display: flex;
@@ -184,7 +188,7 @@ footer h4 {
   margin-left: 3vw;
   color: white;
   font-size: 1.5rem;
-  flex: 1 1 60vw;
+  flex: 1 1 40vw;
 }
 
 footer ul {
@@ -192,12 +196,12 @@ footer ul {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex: 1 1 25vw;
+  flex: 1 1 40vw;
 }
 
 footer ul li {
   color: white;
-  font-size: 3rem;
+  font-size: 2rem;
   padding: 0 10%;
 }
 
