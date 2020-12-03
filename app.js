@@ -3,6 +3,7 @@ const todoInput = document.querySelector(".todo-input");
 const todoButton = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
+const clearButton = document.querySelector(".todo-clear");
 /*
  *
  *
@@ -38,6 +39,9 @@ todoList.addEventListener("click", delComTodo);
 // Select options
 filterOption.addEventListener("click", filterTodo);
 
+// Clear todo button
+clearButton.addEventListener("click", clearTodo);
+
 /*
 
 
@@ -52,8 +56,6 @@ filterOption.addEventListener("click", filterTodo);
 function addTodo(event) {
   // Prevents form from submitting
   event.preventDefault();
-
-  console.log(todoList.children, event);
   // Creates the todo
   // We use the trim function to check if the user input string is not just blanks
   if (todoInput.value.trim() == "") {
@@ -89,9 +91,26 @@ function delComTodo(event) {
 
 // Todo Filter Functions
 function filterTodo(event) {
+  event.preventDefault();
   filter(event.target.value);
 }
 
+// Clears all todos
+function clearTodo(event) {
+  if (todoList.children.length === 0) {
+    alert("There are no Todos to clear");
+  } else {
+    let userIn =
+      prompt(
+        `This clear all locally stored todos. Please type "confirm" to continue`
+      ) + " ";
+    userIn = userIn.toUpperCase();
+    if (userIn.trim() === "CONFIRM") {
+      localStorage.clear();
+    }
+  }
+  getTodos();
+}
 /*
 
 

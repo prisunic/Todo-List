@@ -6,27 +6,24 @@
 
 body {
   /* font-size: 62.5%; */
-  background-image: linear-gradient(
-    120deg,
-    rgb(81, 185, 255),
-    rgb(15, 49, 238)
-  );
+  background-image: linear-gradient(120deg, #51b9ff, #0f31ee);
   color: white;
   min-height: 100vh;
 }
 
 /* All todo add styles */
 
-header {
-  font-size: 2rem;
-}
-
 header,
 form {
-  min-height: 20vh;
+  min-height: 11vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+header {
+  font-size: 2rem;
 }
 
 form input,
@@ -51,14 +48,26 @@ form button:hover {
 
 /* All todo items styles */
 
+.todo-input::placeholder {
+  color: grey;
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+.todo-input:focus::placeholder {
+  color: transparent;
+}
+
 .todo-container {
+  min-height: 68vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .todo-list {
-  min-width: 30%;
+  min-width: 45vw;
+  padding-bottom: 5vh;
   list-style: none;
 }
 
@@ -150,3 +159,77 @@ select {
   background: white;
   color: #f1cf36;
 }
+
+/* Todo Clear*/
+.todo-clear {
+  background: black;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.todo-clear:hover {
+  color: black;
+}
+
+/* Footer*/
+footer {
+  background: black;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer h4 {
+  margin-left: 3vw;
+  color: white;
+  font-size: 1.5rem;
+  flex: 1 1 60vw;
+}
+
+footer ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1 1 25vw;
+}
+
+footer ul li {
+  color: white;
+  font-size: 3rem;
+  padding: 0 10%;
+}
+
+footer ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+footer ul li:nth-child(n + 2) {
+  margin-right: 3vw;
+}
+
+@media (max-width: 720px) {
+  form {
+    padding: 0 3vw;
+  }
+  form input {
+    min-width: 80vw;
+  }
+  form button:nth-child(n + 3) {
+    margin-left: 20vw;
+  }
+  .todo-list {
+    min-width: 70vw;
+  }
+}
+
+@media (max-width: 480px) {
+  form input {
+    max-width: 50vw;
+  }
+  form button:nth-child(n + 3) {
+    margin-left: 10vw;
+  }
+} ;
