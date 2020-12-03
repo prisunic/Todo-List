@@ -37,7 +37,7 @@ todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", delComTodo);
 
 // Select options
-filterOption.addEventListener("click", filterTodo);
+filterOption.addEventListener("change", filterTodo);
 
 // Clear todo button
 clearButton.addEventListener("click", clearTodo);
@@ -92,6 +92,7 @@ function delComTodo(event) {
 // Todo Filter Functions
 function filterTodo(event) {
   event.preventDefault();
+  console.log(event.target.value);
   filter(event.target.value);
 }
 
